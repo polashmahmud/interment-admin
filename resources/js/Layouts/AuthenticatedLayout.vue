@@ -3,14 +3,11 @@ import { ref } from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
-import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
 import { Search } from '@element-plus/icons-vue'
 import {
-  Document,
   Menu as IconMenu,
-  Location,
   Postcard,
   Odometer,
   Connection,
@@ -22,7 +19,6 @@ import {
 } from '@element-plus/icons-vue'
 
 const showingNavigationDropdown = ref(false);
-// bg-green-500 xs:bg-pink-500 sm:bg-blue-500 md:bg-orange-500 lg:bg-purple-500 xl:bg-emerald-500 2xl:bg-white
 </script>
 
 <template>
@@ -33,7 +29,7 @@ const showingNavigationDropdown = ref(false);
                 <div class="">
                     <div class="flex justify-between h-20">
                         <div class="flex flex-col justify-center">
-                            <h3 class="text-xl font-semibold text-gray-800 font-Inter">Hello, Neil 👋 </h3>
+                            <h3 class="text-xl font-semibold text-gray-800 font-Inter">Hello, {{ $page.props.auth.user.name }} 👋 </h3>
                             <p class="text-base font-semibold font-nunito">Welcome to your Dashboard</p>
                         </div>
 
@@ -208,8 +204,8 @@ const showingNavigationDropdown = ref(false);
                                 <span>Dashboard</span>
                             </el-menu-item>
                             <el-menu-item index="2">
-                                <el-icon><document /></el-icon>
-                                <span>Document</span>
+                                <el-icon><User /></el-icon>
+                                <span>Users</span>
                             </el-menu-item>
                             <el-menu-item index="3">
                                 <el-icon><Postcard /></el-icon>
