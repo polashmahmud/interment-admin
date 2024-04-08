@@ -32,37 +32,18 @@ const form = useForm({
             </p>
         </header>
 
-        <form @submit.prevent="form.patch(route('profile.update'))" class="mt-6 space-y-6">
-            <div>
-                <InputLabel for="name" value="Name" />
+        <el-form
+            label-position="top"
+            size="large"
+            @submit.prevent="form.patch(route('profile.update'))"
+        >
+            <el-form-item label="Name" :error="form.errors.name">
+                <el-input v-model="form.name" />
+            </el-form-item>
 
-                <TextInput
-                    id="name"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.name"
-                    required
-                    autofocus
-                    autocomplete="name"
-                />
-
-                <InputError class="mt-2" :message="form.errors.name" />
-            </div>
-
-            <div>
-                <InputLabel for="email" value="Email" />
-
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    required
-                    autocomplete="username"
-                />
-
-                <InputError class="mt-2" :message="form.errors.email" />
-            </div>
+            <el-form-item label="Email" :error="form.errors.email">
+                <el-input v-model="form.email" />
+            </el-form-item>
 
             <div v-if="mustVerifyEmail && user.email_verified_at === null">
                 <p class="text-sm mt-2 text-gray-800">
@@ -97,6 +78,6 @@ const form = useForm({
                     <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Saved.</p>
                 </Transition>
             </div>
-        </form>
+        </el-form>
     </section>
 </template>

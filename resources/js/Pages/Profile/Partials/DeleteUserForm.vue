@@ -64,14 +64,13 @@ const closeModal = () => {
                 <div class="mt-6">
                     <InputLabel for="password" value="Password" class="sr-only" />
 
-                    <TextInput
+                    <el-input
                         id="password"
-                        ref="passwordInput"
                         v-model="form.password"
                         type="password"
-                        class="mt-1 block w-3/4"
                         placeholder="Password"
                         @keyup.enter="deleteUser"
+                        size="large"
                     />
 
                     <InputError :message="form.errors.password" class="mt-2" />

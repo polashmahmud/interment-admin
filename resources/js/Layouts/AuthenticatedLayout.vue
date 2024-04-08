@@ -252,30 +252,31 @@ const showingNavigationDropdown = ref(false);
                 <div class="lg:w-[calc(100%-256px)] xl:w-[calc(100%-288px)] mt-20 lg:ml-64 xl:ml-72 lg:p-6 xl:p-8">
                     <!-- Page Content -->
                     <main>
+                        <slot/>
                         <!-- top cards starts -->
-                        <div v-if="$slots.card">
-                            <div class="lg:mb-6 xl:mb-8">
-                                <slot name="card" />
-                            </div>
-                        </div>
+<!--                        <div v-if="$slots.card">-->
+<!--                            <div class="lg:mb-6 xl:mb-8">-->
+<!--                                <slot name="card" />-->
+<!--                            </div>-->
+<!--                        </div>-->
                         <!-- top cards ends -->
 
-                        <div class="grid grid-cols-12 lg:gap-6 xl:gap-8">
-                            <!-- content start -->
-                            <div class="col-span-8">
-                                <div>
-                                    <slot/>
-                                </div>
-                            </div>
-                            <!-- content end -->
-                            <!-- content sidebar start -->
-                            <div class="col-span-4 offset-8" v-if="$slots.rightSidebar">
-                                <div class="rounded-lg">
-                                    <slot name="rightSidebar"/>
-                                </div>
-                            </div>
-                            <!-- content sidebar end -->
-                        </div>
+<!--                        <div class="grid grid-cols-12 lg:gap-6 xl:gap-8">-->
+<!--                            &lt;!&ndash; content start &ndash;&gt;-->
+<!--                            <div class="col-span-8">-->
+<!--                                <div>-->
+<!--                                    <slot/>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            &lt;!&ndash; content end &ndash;&gt;-->
+<!--                            &lt;!&ndash; content sidebar start &ndash;&gt;-->
+<!--                            <div class="col-span-4 offset-8" v-if="$slots.rightSidebar">-->
+<!--                                <div class="rounded-lg">-->
+<!--                                    <slot name="rightSidebar"/>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            &lt;!&ndash; content sidebar end &ndash;&gt;-->
+<!--                        </div>-->
                     </main>
                 </div>
                 <!-- main content end -->
