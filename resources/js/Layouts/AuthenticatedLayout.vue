@@ -4,7 +4,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/vue3';
+import {Link, router} from '@inertiajs/vue3';
 import { Search } from '@element-plus/icons-vue'
 import {
   Menu as IconMenu,
@@ -19,6 +19,10 @@ import {
 } from '@element-plus/icons-vue'
 
 const showingNavigationDropdown = ref(false);
+
+const handleOpen = (event) => {
+
+}
 </script>
 
 <template>
