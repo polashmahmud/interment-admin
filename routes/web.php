@@ -12,7 +12,9 @@ Route::get('/dashboard', DashboardController::class)
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::get('/users', UserController::class)->name('users.index');
+Route::get('/users', UserController::class)
+    ->middleware('auth')
+    ->name('users.index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
