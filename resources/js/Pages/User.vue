@@ -1,14 +1,47 @@
 <script setup>
 import {Head} from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {ArrowRight} from "@element-plus/icons-vue";
+import {ArrowRight, ArrowDown, Filter} from "@element-plus/icons-vue";
 import Pagination from "@/Components/Pagination.vue";
+import { ref } from 'vue'
 
 defineProps({
     users: {
         type: Object
     }
 })
+
+const value2 = ref('')
+
+const shortcuts = [
+    {
+        text: 'Last week',
+        value: () => {
+            const end = new Date()
+            const start = new Date()
+            start.setDate(start.getDate() - 7)
+            return [start, end]
+        },
+    },
+    {
+        text: 'Last month',
+        value: () => {
+            const end = new Date()
+            const start = new Date()
+            start.setMonth(start.getMonth() - 1)
+            return [start, end]
+        },
+    },
+    {
+        text: 'Last 3 months',
+        value: () => {
+            const end = new Date()
+            const start = new Date()
+            start.setMonth(start.getMonth() - 3)
+            return [start, end]
+        },
+    },
+]
 
 const handleSelectionChange = () => {
 
@@ -25,14 +58,67 @@ const handleSelectionChange = () => {
                 <el-breadcrumb-item>Users</el-breadcrumb-item>
             </el-breadcrumb>
             <div class="flex items-center space-x-3">
-                <el-input style="width: 300px" placeholder="Search something ..." />
                 <el-button type="primary">Add New</el-button>
             </div>
-
         </div>
 
 
-        <div class="mt-6">
+        <div class="mt-6 space-y-3">
+            <div class="flex items-center space-x-2">
+                <el-input style="width: 300px" placeholder="Search something ..." />
+                <div style="width: 400px">
+                    <el-date-picker
+                        v-model="value2"
+                        type="datetimerange"
+                        :shortcuts="shortcuts"
+                        range-separator="To"
+                        start-placeholder="Start date"
+                        end-placeholder="End date"
+                    />
+                </div>
+                <el-dropdown>
+                    <el-button>
+                        <el-icon><Filter /></el-icon>
+                    </el-button>
+                    <template #dropdown>
+                        <el-dropdown-menu>
+                            <el-dropdown-item>Action 1</el-dropdown-item>
+                            <el-dropdown-item>Action 2</el-dropdown-item>
+                            <el-dropdown-item>Action 3</el-dropdown-item>
+                            <el-dropdown-item>Action 4</el-dropdown-item>
+                            <el-dropdown-item>Action 5</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </template>
+                </el-dropdown>
+                <el-dropdown>
+                    <el-button>
+                        Export<el-icon class="el-icon--right"><arrow-down /></el-icon>
+                    </el-button>
+                    <template #dropdown>
+                        <el-dropdown-menu>
+                            <el-dropdown-item>Action 1</el-dropdown-item>
+                            <el-dropdown-item>Action 2</el-dropdown-item>
+                            <el-dropdown-item>Action 3</el-dropdown-item>
+                            <el-dropdown-item>Action 4</el-dropdown-item>
+                            <el-dropdown-item>Action 5</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </template>
+                </el-dropdown>
+                <el-dropdown>
+                    <el-button>
+                        Bulk Actions<el-icon class="el-icon--right"><arrow-down /></el-icon>
+                    </el-button>
+                    <template #dropdown>
+                        <el-dropdown-menu>
+                            <el-dropdown-item>Action 1</el-dropdown-item>
+                            <el-dropdown-item>Action 2</el-dropdown-item>
+                            <el-dropdown-item>Action 3</el-dropdown-item>
+                            <el-dropdown-item>Action 4</el-dropdown-item>
+                            <el-dropdown-item>Action 5</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </template>
+                </el-dropdown>
+            </div>
             <el-table
                 :data="users.data"
                 style="width: 100%"
