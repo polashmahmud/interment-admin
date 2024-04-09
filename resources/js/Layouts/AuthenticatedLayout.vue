@@ -23,6 +23,12 @@ const showingNavigationDropdown = ref(false);
 const handleOpen = (event) => {
 
 }
+
+const handleClose = () => {
+
+}
+
+const input2 = ref('')
 </script>
 
 <template>
