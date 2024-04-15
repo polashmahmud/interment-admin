@@ -89,16 +89,6 @@ const sortChange = ({prop, order}) => {
                     v-model="search"
                     clearable
                 />
-                <div style="width: 400px">
-                    <el-date-picker
-                        v-model="value2"
-                        type="datetimerange"
-                        :shortcuts="shortcuts"
-                        range-separator="To"
-                        start-placeholder="Start date"
-                        end-placeholder="End date"
-                    />
-                </div>
                 <el-dropdown>
                     <el-button>
                         <el-icon>
@@ -107,11 +97,10 @@ const sortChange = ({prop, order}) => {
                     </el-button>
                     <template #dropdown>
                         <el-dropdown-menu>
-                            <el-dropdown-item>Action 1</el-dropdown-item>
-                            <el-dropdown-item>Action 2</el-dropdown-item>
-                            <el-dropdown-item>Action 3</el-dropdown-item>
-                            <el-dropdown-item>Action 4</el-dropdown-item>
-                            <el-dropdown-item>Action 5</el-dropdown-item>
+                            <el-dropdown-item>Today</el-dropdown-item>
+                            <el-dropdown-item>Last 7 days</el-dropdown-item>
+                            <el-dropdown-item>Last 6 month</el-dropdown-item>
+                            <el-dropdown-item>Last year</el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
                 </el-dropdown>
@@ -124,11 +113,11 @@ const sortChange = ({prop, order}) => {
                     </el-button>
                     <template #dropdown>
                         <el-dropdown-menu>
-                            <el-dropdown-item>Action 1</el-dropdown-item>
-                            <el-dropdown-item>Action 2</el-dropdown-item>
-                            <el-dropdown-item>Action 3</el-dropdown-item>
-                            <el-dropdown-item>Action 4</el-dropdown-item>
-                            <el-dropdown-item>Action 5</el-dropdown-item>
+                            <el-dropdown-item>XLSX</el-dropdown-item>
+                            <el-dropdown-item>CVS</el-dropdown-item>
+                            <el-dropdown-item>XLS</el-dropdown-item>
+                            <el-dropdown-item>HTML</el-dropdown-item>
+                            <el-dropdown-item>PDF</el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
                 </el-dropdown>
@@ -141,11 +130,12 @@ const sortChange = ({prop, order}) => {
                     </el-button>
                     <template #dropdown>
                         <el-dropdown-menu>
-                            <el-dropdown-item>Action 1</el-dropdown-item>
-                            <el-dropdown-item>Action 2</el-dropdown-item>
-                            <el-dropdown-item>Action 3</el-dropdown-item>
-                            <el-dropdown-item>Action 4</el-dropdown-item>
-                            <el-dropdown-item>Action 5</el-dropdown-item>
+                            <el-dropdown-item>Delete</el-dropdown-item>
+                            <el-dropdown-item>Export XLSX</el-dropdown-item>
+                            <el-dropdown-item>Export CVS</el-dropdown-item>
+                            <el-dropdown-item>Export XLS</el-dropdown-item>
+                            <el-dropdown-item>Export HTML</el-dropdown-item>
+                            <el-dropdown-item>Export PDF</el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
                 </el-dropdown>
