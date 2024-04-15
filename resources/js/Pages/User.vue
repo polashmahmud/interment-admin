@@ -3,9 +3,8 @@ import {Head, router} from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import {ArrowRight, ArrowDown, Filter, Search} from "@element-plus/icons-vue";
 import Pagination from "@/Components/Pagination.vue";
-import { ref, watch } from 'vue'
+import {ref, watch} from 'vue'
 import _debounce from 'lodash.debounce'
-import Table from "@/Components/Interment/Table/Table.vue";
 
 const props = defineProps({
     users: {
@@ -61,17 +60,14 @@ watch(search, _debounce((value) => {
     });
 }, 500))
 
-const sortChange = ({ prop, order }) => {
-    let sort = order === 'ascending' ? prop : `-${prop}`
-    router.visit(route('users.index', {sort: sort}), {
-        preserveScroll: true,
-    });
+const sortChange = ({prop, order}) => {
+    console.log(prop, order)
 }
 
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="Dashboard"/>
 
     <AuthenticatedLayout>
         <div class="flex items-center justify-between">
@@ -105,7 +101,9 @@ const sortChange = ({ prop, order }) => {
                 </div>
                 <el-dropdown>
                     <el-button>
-                        <el-icon><Filter /></el-icon>
+                        <el-icon>
+                            <Filter/>
+                        </el-icon>
                     </el-button>
                     <template #dropdown>
                         <el-dropdown-menu>
@@ -119,7 +117,10 @@ const sortChange = ({ prop, order }) => {
                 </el-dropdown>
                 <el-dropdown>
                     <el-button>
-                        Export<el-icon class="el-icon--right"><arrow-down /></el-icon>
+                        Export
+                        <el-icon class="el-icon--right">
+                            <arrow-down/>
+                        </el-icon>
                     </el-button>
                     <template #dropdown>
                         <el-dropdown-menu>
@@ -133,7 +134,10 @@ const sortChange = ({ prop, order }) => {
                 </el-dropdown>
                 <el-dropdown>
                     <el-button>
-                        Bulk Actions<el-icon class="el-icon--right"><arrow-down /></el-icon>
+                        Bulk Actions
+                        <el-icon class="el-icon--right">
+                            <arrow-down/>
+                        </el-icon>
                     </el-button>
                     <template #dropdown>
                         <el-dropdown-menu>
@@ -147,10 +151,43 @@ const sortChange = ({ prop, order }) => {
                 </el-dropdown>
             </div>
 
-            <Table></Table>
+            <div>
+                <el-table
+                    ref="multipleTableRef"
+                    :data="users.data"
+                    style="width: 100%"
+                    @selection-change="handleSelectionChange"
+                    @sort-change="sortChange"
+                >
+                    <el-table-column type="selection" width="55"/>
+                    <el-table-column label="Name" width="400">
+                        <template #default="scope">{{ scope.row.name }}</template>
+                    </el-table-column>
+                    <el-table-column sortable="custom" property="email" label="Email" width="300"/>
+                    <el-table-column align="right">
+                        <template #header>
+                            Actions
+                        </template>
+                        <template #default="scope">
+                            <el-button size="small"
+                            >Edit
+                            </el-button
+                            >
+                            <el-button
+                                size="small"
+                                type="danger"
+                            >Delete
+                            </el-button
+                            >
+                        </template>
+                    </el-table-column>
+
+                </el-table>
+            </div>
+
 
             <div class="mt-6">
-                <Pagination :pagination="users.links" />
+                <Pagination :pagination="users.links"/>
             </div>
 
         </div>
