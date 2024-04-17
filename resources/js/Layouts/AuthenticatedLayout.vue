@@ -20,6 +20,8 @@ import {
 
 const showingNavigationDropdown = ref(false);
 
+const isSidebarOpen = ref(false);
+
 const handleOpen = (event) => {
 
 }
@@ -34,22 +36,29 @@ const input2 = ref('')
 <template>
     <div>
         <div class="min-h-[calc(100vh-80px)] bg-white">
-            <nav class="fixed z-50 top-0 lg:w-[calc(100%-256px)] xl:w-[calc(100%-288px)] px-4 mx-auto bg-white border-b border-gray-200 ml-64 xl:ml-72 sm:px-6 lg:px-8">
+            <nav class="fixed z-50 top-0 w-full lg:w-[calc(100%-256px)] xl:w-[calc(100%-288px)] px-4 mx-auto bg-white border-b border-gray-200 lg:ml-64 xl:ml-72 sm:px-6 lg:px-6">
                 <!-- Primary Navigation Menu -->
                 <div class="">
-                    <div class="flex justify-between h-20">
-                        <div class="flex flex-col justify-center">
-                            <h3 class="text-xl font-semibold text-gray-800 font-Inter">Hello, {{ $page.props.auth.user.name }} 👋 </h3>
-                            <p class="text-base font-semibold font-nunito">Welcome to your Dashboard</p>
+                    <div class="flex items-center justify-between h-20">
+                        <div class="flex items-center gap-5 lg:gap-0">
+                            <div class="lg:hidden" @click="isSidebarOpen = true">
+                                <svg class="w-8 h-8 text-slate-700" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-col justify-center hidden md:flex md:visible">
+                                <h3 class="text-base font-semibold text-gray-800 lg:text-xl font-Inter">Hello, {{ $page.props.auth.user.name }} 👋 </h3>
+                                <p class="text-sm font-semibold lg:text-base font-nunito">Welcome to your Dashboard</p>
+                            </div>
                         </div>
 
                         <div class="sm:flex sm:items-center sm:ms-6">
                             <!-- Dropdowns -->
-                            <div class="relative flex items-center gap-5 ms-3">
+                            <div class="relative flex items-center gap-3 sm:gap-4 md:gap-5 ms-3">
 
                                 <el-input
                                     v-model="input2"
-                                    style="width: 240px"
+                                    class="w-32 sm:w-60"
                                     placeholder="Please Input"
                                     size="large"
                                     :suffix-icon="Search"
@@ -94,10 +103,10 @@ const input2 = ref('')
                                 <!-- User -->
                                 <Dropdown align="right">
                                     <template #trigger>
-                                        <span class="inline-flex rounded-md">
+                                        <span class="flex rounded-md">
                                             <button
                                                 type="button"
-                                                class="inline-flex items-center py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md hover:text-gray-700 focus:outline-none"
+                                                class="inline-flex items-center w-10 h-10 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md hover:text-gray-700 focus:outline-none"
                                             >
                                                 <img class="object-cover w-10 h-10 rounded-full" src="https://avatars.githubusercontent.com/u/8996190?v=4" alt="">
 
@@ -126,73 +135,15 @@ const input2 = ref('')
                                 </Dropdown>
                             </div>
                         </div>
-
-                        <!-- Hamburger -->
-                        <div class="flex items-center -me-2 sm:hidden">
-                            <button
-                                @click="showingNavigationDropdown = !showingNavigationDropdown"
-                                class="inline-flex items-center justify-center p-2 text-gray-400 transition duration-150 ease-in-out rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500"
-                            >
-                                <svg class="w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                                    <path
-                                        :class="{
-                                            hidden: showingNavigationDropdown,
-                                            'inline-flex': !showingNavigationDropdown,
-                                        }"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M4 6h16M4 12h16M4 18h16"
-                                    />
-                                    <path
-                                        :class="{
-                                            hidden: !showingNavigationDropdown,
-                                            'inline-flex': showingNavigationDropdown,
-                                        }"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Responsive Navigation Menu -->
-                <div
-                    :class="{ block: showingNavigationDropdown, hidden: !showingNavigationDropdown }"
-                    class="sm:hidden"
-                >
-                    <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                            Dashboard
-                        </ResponsiveNavLink>
-                    </div>
-
-                    <!-- Responsive Settings Options -->
-                    <div class="pt-4 pb-1 border-t border-gray-200">
-                        <div class="px-4">
-                            <div class="text-base font-medium text-gray-800">
-                                {{ $page.props.auth.user.name }}
-                            </div>
-                            <div class="text-sm font-medium text-gray-500">{{ $page.props.auth.user.email }}</div>
-                        </div>
-
-                        <div class="mt-3 space-y-1">
-                            <ResponsiveNavLink :href="route('profile.edit')"> Profile </ResponsiveNavLink>
-                            <ResponsiveNavLink :href="route('logout')" method="post" as="button">
-                                Log Out
-                            </ResponsiveNavLink>
-                        </div>
                     </div>
                 </div>
             </nav>
 
             <div>
+                <!-- overlay -->
+                <div @click="isSidebarOpen = false" :class="isSidebarOpen ?'opacity-100 visible': 'invisible' " class="fixed top-0 left-0 z-50 w-full h-full transition-all duration-300 opacity-0 bg-white/70 lg:w-0 lg:h-0 lg:invisible lg:opacity-0"></div>
                 <!-- layout sidebar start-->
-                <div class="fixed top-0 h-screen overflow-y-auto bg-white border-r border-gray-200 lg:w-64 xl:w-72">
+                <div :class="isSidebarOpen ? ' z-[999]': 'opacity-0 invisible -translate-x-full lg:opacity-100 lg:visible'" class="fixed z-[999] top-0 h-screen overflow-y-auto transition-all duration-300 bg-white border-r border-gray-200 lg:translate-x-0 lg:visible lg:opacity-100 w-72 lg:w-64 xl:w-72">
                     <!-- Logo -->
                     <div class="fixed top-0 flex items-center justify-center py-5 mx-auto text-center left-5">
                         <Link :href="route('dashboard')">
@@ -255,7 +206,7 @@ const input2 = ref('')
                 </div>
                 <!-- layout sidebar end -->
                 <!-- main content start -->
-                <div class="lg:w-[calc(100%-256px)] xl:w-[calc(100%-288px)] mt-20 lg:ml-64 xl:ml-72 lg:p-6 xl:p-8">
+                <div class="lg:w-[calc(100%-256px)] xl:w-[calc(100%-288px)] mt-20 lg:ml-64 xl:ml-72 p-6 lg:p-6 xl:p-8">
                     <!-- Page Content -->
                     <main>
                         <slot/>
